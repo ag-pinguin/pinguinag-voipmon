@@ -16,7 +16,7 @@ class voipmonitor::sniffer::install (
     source => "http://${base_url}/${filename}"
   }
   exec { 'install script':
-    command => "/bin/bash ${install_location}/install-script.sh && touch ${install_location}/.installed"
+    command => "/bin/bash ${install_location}/install-script.sh && touch ${install_location}/.installed",
     creates => "${install_location}/.installed"
   }
 }

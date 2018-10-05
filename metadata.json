@@ -1,0 +1,39 @@
+{
+  "name": "pinguinag-voipmonitor",
+  "version": "1.0.0",
+  "author": "Pinguin AG",
+  "summary": "Installs and configures voipmonitor",
+  "license": "Apache-2.0",
+  "source": "https://github.com/ag-pinguin/pinguinag-voipmonitor",
+  "project_page": "https://github.com/ag-pinguin/pinguinag-voipmonitor",
+  "issues_url": "https://github.com/ag-pinguin/pinguinag-voipmonitor",
+  "dependencies": [
+
+  ],
+  "data_provider": "hiera",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "9"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "16.04",
+        "18.04"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 5.0.0 < 7.0.0"
+    }
+  ],
+  "description": "voipmonitor Module for Debian.",
+  "pdk-version": "1.7.0",
+  "template-url": "file://C:/Program Files/Puppet Labs/DevelopmentKit/share/cache/pdk-templates.git",
+  "template-ref": "1.7.0-0-g57412ed"
+}

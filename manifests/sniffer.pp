@@ -71,5 +71,8 @@ define voipmonitor::sniffer (
     content => template('voipmonitor/sniffer/voipmonitor.conf.erb'),
     notify  => Service["voipmonitor-${id_sensor}"]
   }
-  voipmonitor::service { "voipmonitor-${id_sensor}": }
+  voipmonitor::service { "voipmonitor-${id_sensor}":
+    ensure => $ensure,
+    enable => $enable
+  }
 }

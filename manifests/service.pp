@@ -1,17 +1,20 @@
 # Create service file
 define voipmonitor::service(
+  String $ensure,
+  Boolean $enable,
   String $servicename = $title,
 ) {
   file { "/etc/init.d/${servicename}":
     ensure  => present,
+    content => template('voipmonitor/init.d.erb'),
     mode    => '0744',
-    content => template('voipmonitor/init.d.erb')
+    notify  => Service[$servicename]
   }
   service { $servicename:
     ensure     => $ensure,
     enable     => $enable,
     hasrestart => true,
     hasstatus  => false,
-    provider   => 'init.d'
+    status     => "/usr/bin/test -f /var/run/${servicename}.pid"
   }
 }

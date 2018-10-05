@@ -1,0 +1,110 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:             voipmonitor
+# Required-Start:       $network $remote_fs $syslog $mysql $all
+# Required-Stop:        $network $remote_fs $syslog $mysql $all
+# Should-Start:
+# Should-Stop:
+# Default-Start:        2 3 4 5
+# Default-Stop:         0 1 6
+# Short-Description:    Voipmonitor
+# Description:          Monitor voice quality of SIP/RTP/RTCP
+### END INIT INFO
+
+# chkconfig: 2345 90 10
+# description: voipmonitor
+# on centos, run chkconfig --add voipmonitor; chkconfig voipmonitor on
+# on debian, run update-rc.d voipmonitor defaults
+
+ulimit -c unlimited
+
+BASE=$(basename $0)
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
+TERM="linux";
+
+# uncomment and change interface if you do not have voipmonitor.conf
+ARGS="-v 1"
+PIDFILE=/var/run/<%= @servicename %>.pid
+CONFIGFILE=/etc/<%= @servicename %>.conf
+
+RUN="yes"
+
+if [ -f /etc/default/$BASE ]; then
+        . /etc/default/$BASE
+fi
+
+if [ "$RUN" != "yes" ];then
+        echo "Voipmonitor not yet configured. Edit /etc/default/$BASE first."
+        exit 0
+fi
+
+case "$1" in
+  start)
+  	if [ -f $PIDFILE ]; then
+		PID=`cat $PIDFILE`
+		NAME=`ps -o comm= $PID`
+		if [ "$NAME" = "voipmonitor" ]; then
+			echo "Voipmonitor is already running"
+		else
+			rm $PIDFILE
+			echo -n "Starting voipmonitor: "
+			voipmonitor --config-file $CONFIGFILE --pid-file $PIDFILE $ARGS
+		fi
+	else
+		echo -n "Starting voipmonitor: "
+		voipmonitor --config-file $CONFIGFILE --pid-file $PIDFILE $ARGS
+	fi
+	;;
+  stop)
+  	if [ -f $PIDFILE ]; then
+		PID=`cat $PIDFILE`
+		NAME=`ps -o comm= $PID`
+		if [ "$NAME" = "voipmonitor" ]; then
+			echo -n "Sending kill signal to voipmonitor and waiting to terminate."
+			kill $PID
+			while [ -f $PIDFILE ]
+			do
+				sleep 1
+				echo -n .
+			done
+			echo  " terminated."
+		else
+			echo "voipmonitor is not running";
+			rm $PIDFILE
+		fi
+	else
+		echo "voipmonitor is not running";
+	fi
+	;;
+  force-stop)
+  	if [ -f $PIDFILE ]; then
+		PID=`cat $PIDFILE`
+		NAME=`ps -o comm= $PID`
+		if [ "$NAME" -eq "voipmonitor" ]; then
+			echo "Force terminating voipmonitor (kill -9)."
+			kill -9 $PID
+		else
+			echo "voipmonitor is not running";
+			rm $PIDFILE
+		fi
+	else
+		echo "voipmonitor is not running";
+	fi
+	;;
+  restart|force-reload)
+	#
+	#       If the "reload" option is implemented, move the "force-reload"
+	#       option to the "reload" entry above. If not, "force-reload" is
+	#       just the same as "restart".
+	#
+	$0 stop
+	$0 start
+	;;
+  *)
+  	echo "Usage: /etc/init.d/voipmonitor {start|stop|force-stop|restart}"
+	;;
+esac
+
+exit

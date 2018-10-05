@@ -2,6 +2,7 @@
 class voipmonitor::sniffer::install (
   String $base_url,
   String $install_location,
+  String $spooldir_prefix = lookup('voipmonitor::spooldir_prefix'),
 ){
   case $facts['os']['architecture'] {
     'x86_64': { $arch = '64bit' }
@@ -18,5 +19,8 @@ class voipmonitor::sniffer::install (
   exec { 'install script':
     command => "/bin/bash ${install_location}/install-script.sh && touch ${install_location}/.installed",
     creates => "${install_location}/.installed"
+  }
+  file { $spooldir_prefix]:
+    ensure => directory
   }
 }

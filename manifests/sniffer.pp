@@ -51,7 +51,7 @@ define voipmonitor::sniffer (
   String $sip_register_timeout         = lookup('voipmonitor::sniffer::sip_register_timeout'),
   String $sip_register                 = lookup('voipmonitor::sniffer::sip_register'),
   String $sipport                      = lookup('voipmonitor::sniffer::sipport'),
-  String $spooldir_prefix              = lookup('voipmonitor::sniffer::spooldir_prefix'),
+  String $spooldir_prefix              = lookup('voipmonitor::spooldir_prefix'),
   String $tar_compress_graph           = lookup('voipmonitor::sniffer::tar_compress_graph'),
   String $tar_compress_rtp             = lookup('voipmonitor::sniffer::tar_compress_rtp'),
   String $tar_compress_sip             = lookup('voipmonitor::sniffer::tar_compress_sip'),
@@ -63,12 +63,12 @@ define voipmonitor::sniffer (
   Boolean $utc                         = lookup('voipmonitor::sniffer::utc'),
 ) {
   $spooldir = "${spooldir_prefix}{$id_sensor}"
-  file { [$spooldir_prefix, $spooldir]:
+  file { $spooldir:
     ensure => directory
   }
   file { "/etc/voipmonitor-${id_sensor}.conf":
     ensure  => present,
-    content => template('sniffer/voipmonitor.conf.erb'),
+    content => template('voipmonitor/sniffer/voipmonitor.conf.erb'),
     notify  => Service["voipmonitor-${id_sensor}"]
   }
   voipmonitor::service { "voipmonitor-${id_sensor}": }

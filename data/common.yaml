@@ -1,3 +1,5 @@
+voipmonitor::spooldir_prefix: '/usr/local/share/voipmonitor'
+
 voipmonitor::sniffer::install::base_url: 'www.voipmonitor.org'
 voipmonitor::sniffer::install::install_location: '/usr/local/share/voipmonitor'
 

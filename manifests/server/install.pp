@@ -9,7 +9,8 @@ class voipmonitor::server::install(
     'tshark',
     'mtr',
     'gsfonts',
-    'rrdtool'
+    'rrdtool',
+    'librsvg2-bin'
   ]
   package { $prereqs:
     ensure => present

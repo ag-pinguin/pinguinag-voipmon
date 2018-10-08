@@ -27,13 +27,16 @@ zip
 
 ``` puppet
 class { 'voipmonitor':
-  server          => true,
-  mysqlcompress   => yes,
-  mysqldb         => mydb,
-  mysqlhost       => myhost,
-  mysqlloadconfig => yes,
-  mysqlpassword   => 'PaSSW0Rd',
-  mysqlport       => '3306'
-  mysqlusername   => 'myuser'
+  server           => true,
+  server_bind      => '0.0.0.0',
+  server_bind_port => '60050',
+  server_password  => 'mypassword'
+  mysqlcompress    => 'yes',
+  mysqldb          => 'mydb',
+  mysqlhost        => 'myhost',
+  mysqlloadconfig  => 'yes',
+  mysqlpassword    => 'PaSSW0Rd',
+  mysqlport        => '3306'
+  mysqlusername    => 'myuser'
 }
 ```

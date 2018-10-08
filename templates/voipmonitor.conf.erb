@@ -1,9 +1,6 @@
 [general]
 id_sensor                    = <%= @id_sensor %>
 interface                    = <%= @interface %>
-server_bind                  = <%= @server_bind %>
-server_bind_port             = <%= @server_bind_port %>
-server_password              = <%= @server_password %>
 absolute_timeout             = <%= @absolute_timeout %>
 autocleanmingb               = <%= @autocleanmingb %>
 autocleanspool               = <%= @autocleanspool %>
@@ -65,6 +62,19 @@ tar_graph_level              = <%= @tar_graph_level %>
 tar_maxthreads               = <%= @tar_maxthreads %>
 tar_rtp_level                = <%= @tar_rtp_level %>
 tar_sip_level                = <%= @tar_sip_level %>
+server_password              = <%= @server_password %>
+<% if @server_bind -%>
+server_bind                  = <%= @server_bind %>
+<% end -%>
+<% if @server_bind_port -%>
+server_bind_port             = <%= @server_bind_port %>
+<% end -%>
+<% if @server_destination -%>
+server_destination                  = <%= @server_destination %>
+<% end -%>
+<% if @server_destination_port -%>
+server_destination_port             = <%= @server_destination_port %>
+<% end -%>
 <% if @utc -%>
 utc                          = 1
 <% end -%>
@@ -88,4 +98,4 @@ mysqlport = <%= @mysqlport %>
 <% end -%>
 <% if @mysqlusername -%>
 mysqlusername = <%= @mysqlusername %>
-<% end -%>  
+<% end -%>

@@ -1,5 +1,6 @@
 # Installs voipmonitor server
-class voipmonitor::config(
+define voipmonitor::config(
+  String $service_name,
   String $config_filename,
   String $id_sensor,
   String $interface,
@@ -8,7 +9,6 @@ class voipmonitor::config(
   String $autocleanmingb,
   String $autocleanspool,
   String $autocleanspoolminpercent,
-  String $cdr_partition,
   String $cdr_rtpport,
   String $cdr_sipport,
   String $cdrproxy,
@@ -50,8 +50,6 @@ class voipmonitor::config(
   String $sip_register_timeout,
   String $sipport,
   String $spooldir,
-  String $sqlcallend,
-  String $sqldriver,
   String $tar,
   String $tar_compress_graph,
   String $tar_compress_rtp,
@@ -61,10 +59,13 @@ class voipmonitor::config(
   String $tar_rtp_level,
   String $tar_sip_level,
   Boolean $utc,
+  Optional[String] $cdr_partition           = undef,
   Optional[String] $server_bind             = undef,
   Optional[String] $server_bind_port        = undef,
   Optional[String] $server_destination      = undef,
   Optional[String] $server_destination_port = undef,
+  Optional[String] $sqlcallend              = undef,
+  Optional[String] $sqldriver               = undef,
   Optional[String] $mysqlcompress           = undef,
   Optional[String] $mysqldb                 = undef,
   Optional[String] $mysqlhost               = undef,

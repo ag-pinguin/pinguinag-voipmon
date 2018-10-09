@@ -80,8 +80,9 @@ class voipmonitor (
       ensure => running,
       enable => true,
     }
-    -> class { 'voipmonitor::config':
+    -> voipmonitor::config { 'server':
       config_filename              => '/etc/voipmonitor.conf',
+      service_name                 => 'voipmonitor',
       mysqlcompress                => $mysqlcompress,
       mysqldb                      => $mysqldb,
       mysqlhost                    => $mysqlhost,

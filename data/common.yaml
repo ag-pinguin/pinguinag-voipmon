@@ -1,5 +1,3 @@
-voipmonitor::spooldir_prefix: '/var/spool/voipmonitor/'
-
 voipmonitor::server::install::html_folder: '/var/www'
 voipmonitor::server::install::manage_cron: true
 
@@ -54,6 +52,7 @@ voipmonitor::sip_register_active_nologbin: 'yes'
 voipmonitor::sip_register_timeout: '5'
 voipmonitor::sip_register: 'no'
 voipmonitor::sipport: '5060'
+voipmonitor::spooldir_prefix: '/var/spool/voipmonitor/'
 voipmonitor::tar_compress_graph: 'gzip'
 voipmonitor::tar_compress_rtp: 'no'
 voipmonitor::tar_compress_sip: 'gzip'

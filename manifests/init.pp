@@ -49,6 +49,7 @@ class voipmonitor (
   String $sip_register,
   String $sipport,
   String $spooldir,
+  String $spooldir_prefix,
   String $sqlcallend,
   String $sqldriver,
   String $tar_compress_graph,
@@ -149,6 +150,8 @@ class voipmonitor (
       utc                          => $utc,
     }
   } else {
-    class { 'voipmonitor::sniffer::install': }
+    class { 'voipmonitor::sniffer::install':
+      spooldir_prefix => $spooldir_prefix,
+    }
   }
 }

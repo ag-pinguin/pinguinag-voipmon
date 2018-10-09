@@ -1,5 +1,6 @@
 # Installs and configures voipmon
 class voipmonitor (
+  Boolean $manage_cron,
   Boolean $server,
   Boolean $utc,
   String $absolute_timeout,
@@ -75,7 +76,9 @@ class voipmonitor (
     if $spooldir == undef {
       fail('spooldir has to be defined when installing server')
     }
-    class { 'voipmonitor::server::install': }
+    class { 'voipmonitor::server::install':
+      manage_cron => $manage_cron
+    }
     -> voipmonitor::service { 'voipmonitor':
       ensure => running,
       enable => true,

@@ -107,6 +107,7 @@ class voipmonitor (
       dscp                         => $dscp,
       filter                       => $filter,
       managerport                  => $managerport,
+      managerip                    => '127.0.0.1',
       max_buffer_mem               => $max_buffer_mem,
       maxpoolsize                  => $maxpoolsize,
       maxpoolsize_2                => $maxpoolsize_2,

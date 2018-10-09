@@ -16,6 +16,7 @@ define voipmonitor::config(
   String $dscp,
   String $filter,
   String $managerport,
+  String $managerip,
   String $max_buffer_mem,
   String $maxpoolsize,
   String $maxpoolsize_2,
@@ -77,6 +78,6 @@ define voipmonitor::config(
   file { $config_filename:
     ensure  => present,
     content => template('voipmonitor/voipmonitor.conf.erb'),
-    notify  => Service[$config_filename]
+    notify  => Service[$service_name]
   }
 }

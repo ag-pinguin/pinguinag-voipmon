@@ -13,7 +13,6 @@ class voipmonitor (
   String $destroy_call_at_bye,
   String $dscp,
   String $filter,
-  String $interface,
   String $managerport,
   String $max_buffer_mem,
   String $maxpoolsize_2,
@@ -48,10 +47,6 @@ class voipmonitor (
   String $sip_register_timeout,
   String $sip_register,
   String $sipport,
-  String $spooldir,
-  String $spooldir_prefix,
-  String $sqlcallend,
-  String $sqldriver,
   String $tar_compress_graph,
   String $tar_compress_rtp,
   String $tar_compress_sip,
@@ -60,9 +55,14 @@ class voipmonitor (
   String $tar_rtp_level,
   String $tar_sip_level,
   String $tar,
+  Optional[String] $interface        = undef,
+  Optional[String] $spooldir         = undef,
+  Optional[String] $spooldir_prefix  = undef,
   Optional[String] $server_password  = undef,
   Optional[String] $server_bind      = undef,
   Optional[String] $server_bind_port = undef,
+  Optional[String] $sqlcallend       = undef,
+  Optional[String] $sqldriver        = undef,
   Optional[String] $mysqlcompress    = undef,
   Optional[String] $mysqldb          = undef,
   Optional[String] $mysqlhost        = undef,
@@ -72,6 +72,9 @@ class voipmonitor (
   Optional[String] $mysqlusername    = undef,
 ){
   if $server {
+    if $spooldir == undef {
+      fail('spooldir has to be defined when installing server')
+    }
     class { 'voipmonitor::server::install': }
     -> voipmonitor::service { 'voipmonitor':
       ensure => running,
@@ -150,6 +153,9 @@ class voipmonitor (
       utc                          => $utc,
     }
   } else {
+    if $spooldir_prefix == undef {
+      fail('spooldir_prefix has to be defined when installing sniffer')
+    }
     class { 'voipmonitor::sniffer::install':
       spooldir_prefix => $spooldir_prefix,
     }

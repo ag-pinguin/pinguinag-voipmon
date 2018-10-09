@@ -12,7 +12,6 @@ define voipmonitor::sniffer (
   String $autocleanmingb               = lookup('voipmonitor::autocleanmingb'),
   String $autocleanspool               = lookup('voipmonitor::autocleanspool'),
   String $autocleanspoolminpercent     = lookup('voipmonitor::autocleanspoolminpercent'),
-  String $cdr_partition                = lookup('voipmonitor::cdr_partition'),
   String $cdr_rtpport                  = lookup('voipmonitor::cdr_rtpport'),
   String $cdr_sipport                  = lookup('voipmonitor::cdr_sipport'),
   String $cdrproxy                     = lookup('voipmonitor::cdrproxy'),

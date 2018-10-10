@@ -61,6 +61,7 @@ define voipmonitor::config(
   String $tar_sip_level,
   Boolean $utc,
   Boolean $server                           = false,
+  Optional[String] $html_folder             = undef,
   Optional[String] $timezone                = undef,
   Optional[String] $cdr_partition           = undef,
   Optional[String] $server_bind             = undef,

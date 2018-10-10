@@ -59,6 +59,7 @@ class voipmonitor (
   String $tar_sip_level,
   String $tar,
   String $timezone,
+  String $html_folder,
   Optional[String] $interface        = undef,
   Optional[String] $spooldir         = undef,
   Optional[String] $spooldir_prefix  = undef,
@@ -92,6 +93,7 @@ class voipmonitor (
       server                       => true,
       config_filename              => '/etc/voipmonitor.conf',
       service_name                 => 'voipmonitor',
+      html_folder                  => $html_folder,
       mysqlcompress                => $mysqlcompress,
       mysqldb                      => $mysqldb,
       mysqlhost                    => $mysqlhost,
@@ -165,6 +167,7 @@ class voipmonitor (
       utc                          => $utc,
     }
     class { 'voipmonitor::server::install':
+      html_folder      => $html_folder,
       install_location => $install_location,
       manage_cron      => $manage_cron,
       spooldir_prefix  => $spooldir_prefix,

@@ -45,8 +45,8 @@ class voipmonitor::server::install(
   }
 
   exec { 'unpack phantomjs-2.1.1-x86_64':
-    command => /bin/gunzip phantomjs-2.1.1-x86_64.gz && /bin/chmod +x phantomjs-2.1.1-x86_64,
-    cwd     => "${html_folder}/bin"
+    command => '/bin/gunzip phantomjs-2.1.1-x86_64.gz && /bin/chmod +x phantomjs-2.1.1-x86_64',
+    cwd     => "${html_folder}/bin",
     creates => "${html_folder}/bin/phantomjs-2.1.1-x86_64"
   }
   exec { 'unpack tshark-2.3.0.3-x86_64':

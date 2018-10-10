@@ -1,4 +1,4 @@
-voipmonitor::server::install::html_folder: '/var/www'
+
 
 voipmonitor::sniffer::enable: true
 voipmonitor::sniffer::ensure: 'running'
@@ -17,6 +17,7 @@ voipmonitor::cdrproxy: 'yes'
 voipmonitor::destroy_call_at_bye: '1200'
 voipmonitor::dscp: 'yes'
 voipmonitor::filter: 'not vlan'
+voipmonitor::html_folder: '/var/www'
 voipmonitor::manage_cron: true
 voipmonitor::managerip: '0.0.0.0'
 voipmonitor::managerport: '5029'

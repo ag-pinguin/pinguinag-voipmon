@@ -60,6 +60,8 @@ define voipmonitor::config(
   String $tar_rtp_level,
   String $tar_sip_level,
   Boolean $utc,
+  Boolean $server                           = false,
+  Optional[String] $timezone                = undef,
   Optional[String] $cdr_partition           = undef,
   Optional[String] $server_bind             = undef,
   Optional[String] $server_bind_port        = undef,
@@ -79,5 +81,13 @@ define voipmonitor::config(
     ensure  => present,
     content => template('voipmonitor/voipmonitor.conf.erb'),
     notify  => Service[$service_name]
+  }
+  if $server {
+    file { "${html_folder}/config/configuration.php":
+      ensure  => present,
+      owner   => 'www-data',
+      mode    => '0700',
+      content => template('voipmonitor/configuration.php.erb')
+    }
   }
 }

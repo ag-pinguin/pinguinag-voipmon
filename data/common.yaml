@@ -63,4 +63,5 @@ voipmonitor::tar_maxthreads: '8'
 voipmonitor::tar_rtp_level: '1'
 voipmonitor::tar_sip_level: '6'
 voipmonitor::tar: 'yes'
+voipmonitor::timezone: 'Europe/Berlin'
 voipmonitor::utc: true

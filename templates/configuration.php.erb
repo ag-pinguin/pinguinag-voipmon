@@ -1,0 +1,215 @@
+<?php
+
+# URL which will be used for hypertext links. For example in email alerts
+define("HTTP_REFERER", "");
+define("SNIFFER_NAME", "<%= @service_name %>");
+
+# Directory path to the sniffer data
+define("SPOOLDIR", "<%= @spooldir %>");
+define("SECOND_SPOOLDIR", "");
+define("NEXT_SPOOLDIRS", "");
+// define("SPOOLDIR_BY_SENSOR", false);
+
+# default sniffer sensor hostname (localhost). If you have more sensors define it in settings -> sensors
+define("VPMANAGERHOST", "<%= @managerip %>");
+# default sniffer sensor port.
+define("VPMANAGERPORT", <%= @managerport %>);
+
+# sql driver: mysql | mssql | odbc
+define("SQL_DRIVER", "mysql");
+
+define("SQL_CDRTABLE", "cdr");
+define("SQL_CDR_NEXT_TABLE", "cdr_next");
+define("SQL_CDR_UA_TABLE", "cdr_ua");
+define("SQL_CDR_SIP_RESPONSE_TABLE", "cdr_sip_response");
+
+define("MYSQL_HOST", "<%= @mysqlhost %>");
+define("MYSQL_DB", "<%= @mysqldb %>");
+define("MYSQL_USER", "<%= @mysqlusername %>");
+define("MYSQL_PASS", "<%= @mysqlpassword %>");
+
+define("MSSQL_HOST", "127.0.0.1");
+define("MSSQL_DB", "voipmonitor");
+define("MSSQL_USER", "root");
+define("MSSQL_PASS", '');
+
+define("ODBC_DSN", "voipmonitor");
+define("ODBC_USER", "root");
+define("ODBC_PASS", '');
+define("ODBC_DRIVER", "mssql");
+// define("DISABLE_PCONNECT", false);
+
+define("TIMEZONE", "<%= @timezone %>");
+<% if @utc -%>
+define("SENSORS_TIMEZONE", "UTC");
+<% else -%>
+define("TIMEZONE", "<%= @timezone %>");
+<% end -%>
+
+# Date format with default Y-m-d. http://www.php.net/manual/en/function.date.php
+define("DATE_FORMAT", "Y-m-d");
+# Time format with default G:i:s. http://www.php.net/manual/en/function.date.php
+define("TIME_FORMAT", "G:i:s");
+define("WEEK_START", "monday");
+// define("LANGUAGE", "en");
+
+# Default time interval used in CDR section
+define("DEFAULT_CDR_TYPE_INTERVAL", "today");
+# How many days will be filtered in CDR section by default
+define("DEFAULT_CDR_INTERVAL", 0);
+# Default time interval used in Dashboard section
+define("DEFAULT_DASHBOARD_TYPE_INTERVAL", "last_60m");
+# Find all related calls which starts +- internal - default 5 seconds
+define("LEGSBYCID_INTERVAL", 5);
+# Find all related calls which starts +- internal - default 5 seconds
+define("LEGSBYHEADER_INTERVAL", 3600);
+
+define("DEFAULT_EMAIL_FROM", "");
+# Some mailers (outlook 2003) does not like plain text and show only plain text part of email messages. If you do not see HTML part enable this option
+// define("DISABLE_EMAIL_PLAIN_TEXT_INFO", false);
+define("EMAIL_HEADER_EOL", "CRLF - \r\n");
+
+# Enable or disable use of internal GEOIP database (if loaded)
+// define("GEOIP_USE_LOCAL_DATA", true);
+# Personal key for maxmind.com geoip service
+define("GEOIP_KEY_MAXMIND", "");
+# Personal user id for maxmind.com geoip service
+define("GEOIP_USER_ID_MAXMIND", "");
+# Personal key for ipinfodb.com
+define("GEOIP_KEY_IPINFODB", "");
+
+# Enable nagios web interfae
+define("NAGIOS_ENABLE", false);
+# Unix user under which is nagios running. This user is used in sudo so the GUI know how to send HUP signal to nagios (reload configuration)
+define("NAGIOS_USER", "nagios");
+define("NAGIOS_BIN", "nagios");
+define("NAGIOS_MAIN_CONFIG", "/etc/nagios/nagios.cfg");
+define("NAGIOS_VM_CONFIG", "/etc/nagios/conf.d/vm.cfg");
+define("NAGIOS_VM_CONFIG_PREFIX", "VM_");
+define("NAGIOS_STATUS", "/var/log/nagios/status.dat");
+define("NAGIOS_CMD_APPLY_VM_CONFIG", "killall -HUP nagios");
+# Insert "sudo -u NAGIOS_USER" before "killall -HUP nagios" and before nagios3 -v /path/to/config. This is neccessery in case the nagios is running under another user than http server which is probably in 99% of cases. Typical username for nagios is "nagios" in debian like systems. You also need to put "www-data ALL=(nagios) NOPASSWD: ALL" into sudoers file.
+define("NAGIOS_CMD_APPLY_SUDO", false);
+
+// define("ENABLE_CUSTOMERS", false);
+define("TYPE_CUSTOMERS_TABLES", "users");
+
+define("IPACCOUNT_ENABLED", false);
+define("IPACCOUNT_PORTS", "22, 80, 443");
+
+define("TCPDUMP_FOLDER", "<%= @spooldir%>/tcpdump");
+define("TCPDUMP_FILE_PERIOD_MINUTES", 60);
+define("TCPDUMP_INTERFACE", "eth0");
+
+// define("MYSQL_HOST_ALERTS", "127.0.0.1");
+// define("MYSQL_DB_ALERTS", "voipmonitor");
+// define("MYSQL_USER_ALERTS", "root");
+// define("MYSQL_PASS_ALERTS", '');
+
+# Enable CDR group bottom panel
+define("ENABLE_GROUPS_CDR", true);
+define("DISABLE_SENSOR_NAME_CDR", false);
+define("DETECT_FILES_IN_REMOTE_SENSORS", false);
+define("ENABLE_MOS_LQO", false);
+define("ENABLE_CDR_COLUMN_CALL_ID", false);
+define("ENABLE_GROUP_CDR_BY_IP_GROUPS", true);
+define("ENABLE_CDR_FORCE_INDEX_CALLDATE", false);
+# If enabled in CDR IP addresses will be named by internal IP database lookup table
+define("ENABLE_SQL_IP_REVERSE_LOOKUP", false);
+# If enabled in CDR IP address will be named by DNS
+define("ENABLE_IP_REVERSE_LOOKUP", false);
+define("ENABLE_SQL_IP_REVERSE_LOOKUP_ALERTS", true);
+define("ENABLE_IP_REVERSE_LOOKUP_ALERTS", true);
+define("ENABLE_DIG_REVERSE_RESOLVE", false);
+# If enabled in CDR tel. numbers will be named by internal prefix database lookup table
+define("ENABLE_SQL_CUSTOMER_PREFIX_LOOKUP", false);
+define("ENABLE_TEST_SIP_USERS", false);
+
+# if true, user is not checked against valid session when downloading WAV. Suitable for downloading WAV outside VoIPmonitor GUI. If you need to secure it, you can set WAV key
+define("DISABLE_WAV_SECURITY", false);
+# KEY used to download WAV files without user/pass authentication
+// define("WAV_API_KEY", "puthereSomeKey");
+# Hide SIP domain in CDR
+define("DISABLE_SHOW_DOMAIN", false);
+# Hide live play in active calls
+define("DISABLE_LIVEPLAY", false);
+# Hide play buttons in CDR
+define("DISABLE_CDRPLAY", false);
+# Path to sniffer voipmonitor.conf which is used when uploading pcap files.
+define("UPLOADPCAP_SNIFFERCONF", "/etc/voipmonitor.conf");
+# String used to generate unique hashes in URL for sharing cdr
+define("SHARE_PASSWORD", '');
+define("CSV_FIELD_SEPARATOR", ";");
+// define("CSV_DISABLE_SMART_FIELD_BORDER", false);
+// define("DISABLE_PERCENTILES", false);
+// define("DISABLE_BINARY_GROUPS", false);
+// define("DISABLE_HTML_AUDIO_PLAYER", false);
+// define("DEDICATED_WAV_PLAYER", false);
+
+// define("SESSION_NAME_BY_SERVER_FOLDER", false);
+# Page size for pdf export
+define("PAGE_SIZE", "A4");
+define("CRON_LOCK_TIMEOUT", 10);
+// define("UPG_DOWNLOAD_TIMEOUT", 60);
+// define("HTTP_PROXY_SERVER", "127.0.0.1:8080");
+define("DISABLE_CHECK_SPOOLDIR", false);
+// define("HIDE_TIMEZONE_INFORMATION", false);
+// define("DISABLE_CHECK_CRONTAB", false);
+// define("ENABLE_SCREEN_POPUP", false);
+// define("DISABLE_CHECK_NEW_VERSION", false);
+// define("DISABLE_LIVE_SNIFFER", false);
+// define("HIDE_MESSAGE", false);
+// define("HIDE_MESSAGE_SECRET", "");
+// define("DISABLE_AUTOLICENSE", false);
+// define("HIDELICENSE", false);
+define("CSV_EXPORT_FOLDER", NULL);
+// define("ENABLE_NETWORK", false);
+// define("DISABLE_CDRVMSHARE", false);
+// define("DISABLE_FRAME_CHECK", false);
+// define("REPORT_TIMEOUT", NULL);
+// define("DISABLE_CHART_CACHE", false);
+define("MAP_TYPE", "OSM");
+define("GOOGLE_MAP_API_KEY", NULL);
+// define("CRASH_BACKTRACE_DISABLE_SEND", false);
+// define("CRASH_BACKTRACE_TO_EMAIL", "");
+// define("CRASH_BACKTRACE_CUSTOM_ID", "");
+// define("AUTOAUDIT_TEMPLATE_DOWNLOAD_WAV", "");
+// define("AUTOAUDIT_TEMPLATE_DOWNLOAD_PCAP", "");
+// define("AUTOAUDIT_TEMPLATE_DOWNLOAD_PCAP_MULTIPLE", "");
+// define("AUTOAUDIT_TEMPLATE_DOWNLOAD_PCAP_MULTIPLE_CALL", "");
+// define("AUTOAUDIT_TEMPLATE_DOWNLOAD_PCAP_MESSAGE", "");
+// define("AUTOAUDIT_TEMPLATE_DOWNLOAD_PCAP_SS7", "");
+// define("AUTOAUDIT_TEMPLATE_PLAY_WAV", "");
+// define("AUTOAUDIT_TEMPLATE_SHOW_FAX", "");
+// define("AUTOAUDIT_TEMPLATE_BATCH_DOWNLOAD", "");
+// define("AUTOAUDIT_TEMPLATE_SET_FILTER_CDR", "");
+
+// define("CUSTOM_CONFIGURATION", "");
+
+// define("BYPASS_LOGIN_HOST_ADDR", NULL);
+
+// define("SSH_ID_RSA", NULL);
+// define("SSH_ID_RSA_PASSWORD", NULL);
+
+// define("HOST_NAME", NULL);
+
+// define("KEEP_FRAUD_ALERT_INFO", false);
+
+// define("ENABLE_DEBUG", false);
+
+// define("DEVELOPMENT", false);
+// define("ENABLE_MYSQL_LOG", false);
+// define("ENABLE_MYSQL_LOG_FETCH", false);
+// define("MYSQL_LOG_PATH", "");
+
+// define("ENABLE_BETA", false);
+
+// define("WIKI_URL", "");
+
+// define("BRAND_NAME", "");
+
+// define("BAD_LOGIN_LOG", "");
+
+define("EULA_AGREE", true);
+
+?>

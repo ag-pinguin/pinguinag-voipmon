@@ -58,6 +58,7 @@ class voipmonitor (
   String $tar_rtp_level,
   String $tar_sip_level,
   String $tar,
+  String $timezone,
   Optional[String] $interface        = undef,
   Optional[String] $spooldir         = undef,
   Optional[String] $spooldir_prefix  = undef,
@@ -88,6 +89,7 @@ class voipmonitor (
       enable => true,
     }
     voipmonitor::config { 'server':
+      server                       => true,
       config_filename              => '/etc/voipmonitor.conf',
       service_name                 => 'voipmonitor',
       mysqlcompress                => $mysqlcompress,
@@ -159,6 +161,7 @@ class voipmonitor (
       tar_maxthreads               => $tar_maxthreads,
       tar_rtp_level                => $tar_rtp_level,
       tar_sip_level                => $tar_sip_level,
+      timezone                     => $timezone,
       utc                          => $utc,
     }
     class { 'voipmonitor::server::install':

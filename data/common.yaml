@@ -3,8 +3,8 @@ voipmonitor::server::install::html_folder: '/var/www'
 voipmonitor::sniffer::enable: true
 voipmonitor::sniffer::ensure: 'running'
 
-voipmonitor::sniffer::install::base_url: 'www.voipmonitor.org'
-voipmonitor::sniffer::install::install_location: '/usr/local/share/voipmonitor'
+voipmonitor::base_url: 'www.voipmonitor.org'
+voipmonitor::install_location: '/usr/local/share/voipmonitor'
 
 voipmonitor::absolute_timeout: '14400'
 voipmonitor::autocleanmingb: '5'

@@ -2,7 +2,7 @@
 class voipmonitor::sniffer::install (
   String $base_url,
   String $install_location,
-  String $spooldir_prefix = lookup('voipmonitor::spooldir_prefix'),
+  String $spooldir_prefix,
 ){
   # Step 0: make sure install location exists
   file { $install_location:

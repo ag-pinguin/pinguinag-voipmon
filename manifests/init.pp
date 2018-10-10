@@ -7,6 +7,7 @@ class voipmonitor (
   String $autocleanmingb,
   String $autocleanspool,
   String $autocleanspoolminpercent,
+  String $base_url,
   String $cdr_partition,
   String $cdr_rtpport,
   String $cdr_sipport,
@@ -14,6 +15,7 @@ class voipmonitor (
   String $destroy_call_at_bye,
   String $dscp,
   String $filter,
+  String $install_location,
   String $managerport,
   String $max_buffer_mem,
   String $maxpoolsize_2,
@@ -162,7 +164,9 @@ class voipmonitor (
       fail('spooldir_prefix has to be defined when installing sniffer')
     }
     class { 'voipmonitor::sniffer::install':
-      spooldir_prefix => $spooldir_prefix,
+      base_url         => $base_url,
+      install_location => $install_location,
+      spooldir_prefix  => $spooldir_prefix,
     }
   }
 }

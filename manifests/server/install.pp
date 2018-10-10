@@ -1,7 +1,8 @@
 # Installs voipmonitor server
 class voipmonitor::server::install(
-  String $html_folder,
   Boolean $manage_cron,
+  String $html_folder,
+  String $install_location,
   String $spooldir_prefix = lookup('voipmonitor::spooldir_prefix')
   ) {
     # Step 0: prerequisites without php modules
@@ -10,7 +11,7 @@ class voipmonitor::server::install(
     'mtr',
     'gsfonts',
     'rrdtool',
-    'librsvg2-bin'
+    'librsvg2-bin',
   ]
   package { $prereqs:
     ensure => present
@@ -30,14 +31,14 @@ class voipmonitor::server::install(
 
   # Step 3: GUI
   exec { 'fetch GUI':
-    command => '/usr/bin/wget http://www.voipmonitor.org/download-gui?version=latest&major=5&phpver=56&festry" -O w.tar.gz'
+    command => '/usr/bin/wget http://www.voipmonitor.org/download-gui?version=latest&major=5&phpver=56&festry" -O w.tar.gz',
     cwd     => $html_folder,
     creates => "${html_folder}/index.php"
   }
-  > exec { 'unpack':
-    command => "/bin/tar -xf w.tar.gz --strip 1",
+  -> exec { 'unpack':
+    command => '/bin/tar -xf w.tar.gz --strip 1',
     creates => "${html_folder}/index.php",
-    cwd     => $install_location
+    cwd     => $install_location,
   }
   -> exec { 'delete old file':
     command => "/bin/rm ${html_folder}/w.tar.gz",

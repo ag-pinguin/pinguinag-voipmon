@@ -78,14 +78,16 @@ class voipmonitor (
     if $spooldir == undef {
       fail('spooldir has to be defined when installing server')
     }
-    class { 'voipmonitor::server::install':
-      manage_cron => $manage_cron
+    class { 'voipmonitor::sniffer::install':
+      base_url         => $base_url,
+      install_location => $install_location,
+      spooldir_prefix  => $spooldir_prefix,
     }
-    -> voipmonitor::service { 'voipmonitor':
+    voipmonitor::service { 'voipmonitor':
       ensure => running,
       enable => true,
     }
-    -> voipmonitor::config { 'server':
+    voipmonitor::config { 'server':
       config_filename              => '/etc/voipmonitor.conf',
       service_name                 => 'voipmonitor',
       mysqlcompress                => $mysqlcompress,
@@ -158,6 +160,11 @@ class voipmonitor (
       tar_rtp_level                => $tar_rtp_level,
       tar_sip_level                => $tar_sip_level,
       utc                          => $utc,
+    }
+    class { 'voipmonitor::server::install':
+      install_location => $install_location,
+      manage_cron      => $manage_cron,
+      spooldir_prefix  => $spooldir_prefix,
     }
   } else {
     if $spooldir_prefix == undef {

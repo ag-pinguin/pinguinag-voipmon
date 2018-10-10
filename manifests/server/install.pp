@@ -3,9 +3,9 @@ class voipmonitor::server::install(
   Boolean $manage_cron,
   String $html_folder,
   String $install_location,
-  String $spooldir_prefix = lookup('voipmonitor::spooldir_prefix')
+  String $spooldir_prefix,
   ) {
-    # Step 0: prerequisites without php modules
+    # Step 1: prerequisites without php modules
   $prereqs = [
     'tshark',
     'mtr',
@@ -16,9 +16,6 @@ class voipmonitor::server::install(
   package { $prereqs:
     ensure => present
   }
-  # Step 1: we need a running voipmonitor service
-  include voipmonitor::sniffer::install
-  voipmonitor::service { 'voipmonitor': }
 
   # Step 2: IONcube
   exec { 'install IONcube':
@@ -31,16 +28,16 @@ class voipmonitor::server::install(
 
   # Step 3: GUI
   exec { 'fetch GUI':
-    command => '/usr/bin/wget http://www.voipmonitor.org/download-gui?version=latest&major=5&phpver=56&festry" -O w.tar.gz',
+    command => '/usr/bin/wget "http://www.voipmonitor.org/download-gui?version=latest&major=5&phpver=56&festry" -O w.tar.gz',
     cwd     => $html_folder,
     creates => "${html_folder}/index.php"
   }
-  -> exec { 'unpack':
+  -> exec { 'unpack gui':
     command => '/bin/tar -xf w.tar.gz --strip 1',
     creates => "${html_folder}/index.php",
-    cwd     => $install_location,
+    cwd     => $html_folder,
   }
-  -> exec { 'delete old file':
+  -> exec { 'delete old GUI archive':
     command => "/bin/rm ${html_folder}/w.tar.gz",
     onlyif  => "/usr/bin/test -f ${html_folder}/w.tar.gz",
   }

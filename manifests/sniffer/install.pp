@@ -38,6 +38,7 @@ class voipmonitor::sniffer::install (
 
   # Step 3: make sure spooldir exists
   file { $spooldir_prefix:
-    ensure => directory
+    ensure => directory,
+    owner  => 'www-data'
   }
 }

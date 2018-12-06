@@ -12,6 +12,7 @@ define voipmonitor::config(
   String $cdr_rtpport,
   String $cdr_sipport,
   String $cdrproxy,
+  String $cleandatabase,
   String $destroy_call_at_bye,
   String $dscp,
   String $filter,

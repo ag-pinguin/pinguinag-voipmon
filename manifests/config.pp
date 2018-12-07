@@ -12,7 +12,7 @@ define voipmonitor::config(
   String $cdr_rtpport,
   String $cdr_sipport,
   String $cdrproxy,
-  String $cleandatabase,
+
   String $destroy_call_at_bye,
   String $dscp,
   String $filter,
@@ -62,6 +62,7 @@ define voipmonitor::config(
   String $tar_sip_level,
   Boolean $utc,
   Boolean $server                           = false,
+  Optional[String] $cleandatabase           = undef,
   Optional[String] $html_folder             = undef,
   Optional[String] $timezone                = undef,
   Optional[String] $cdr_partition           = undef,

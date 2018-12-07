@@ -8,7 +8,6 @@ autocleanspoolminpercent     = <%= @autocleanspoolminpercent %>
 cdr_rtpport                  = <%= @cdr_rtpport %>
 cdr_sipport                  = <%= @cdr_sipport %>
 cdrproxy                     = <%= @cdrproxy %>
-cleandatabase                = <%= @cleandatabase %>
 destroy_call_at_bye          = <%= @destroy_call_at_bye %>
 dscp                         = <%= @dscp %>
 filter                       = <%= @filter %>
@@ -101,4 +100,7 @@ sqldriver                    = <%= @sqldriver %>
 <% end -%>
 <% if @cdr_partition -%>
 cdr_partition                = <%= @cdr_partition %>
+<% end -%>
+<% if @cleandatabase -%>
+cleandatabase                = <%= @cleandatabase %>
 <% end -%>

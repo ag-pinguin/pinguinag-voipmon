@@ -33,7 +33,6 @@ class voipmonitor::sniffer::install (
   # We use a custom install script which is just like the regular install script
   # But does not create config files or service, since that is handled by puppet
   file { "${install_location}/custom-install-script":
-    ensure => exists,
     owner  => 'root',
     group  => 'root',
     mode   => '0700',

@@ -14,6 +14,17 @@ voipmonitor::sniffer { 'my-first-sniffer':
 }
 ```
 
+The module also supports arbritrary config via custom_config hash:
+
+``` puppet
+voipmonitor::sniffer { 'my-first-sniffer':
+  ensure             => running
+  custom_config => {
+    somekey => "somevalue"
+  }
+}
+```
+
 ### Configure server
 This does not install php prerequisites, to allow you to configure apache, php,
 etc yourself.

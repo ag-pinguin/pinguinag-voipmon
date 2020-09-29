@@ -12,7 +12,7 @@ define voipmonitor::config(
   String $cdr_rtpport,
   String $cdr_sipport,
   String $cdrproxy,
-
+  Hash $custom_config,
   String $destroy_call_at_bye,
   String $dscp,
   String $filter,
@@ -87,10 +87,11 @@ define voipmonitor::config(
   }
   if $server {
     file { "${html_folder}/config/configuration.php":
-      ensure  => present,
-      owner   => 'www-data',
-      mode    => '0700',
-      content => template('voipmonitor/configuration.php.erb')
+      ensure    => present,
+      owner     => 'www-data',
+      mode      => '0700',
+      content   => template('voipmonitor/configuration.php.erb'),
+      show_diff => false
     }
   }
 }

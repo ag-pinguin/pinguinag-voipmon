@@ -15,6 +15,7 @@ voipmonitor::cdr_rtpport: 'yes'
 voipmonitor::cdr_sipport: 'yes'
 voipmonitor::cdrproxy: 'yes'
 voipmonitor::cleandatabase: '0'
+voipmonitor::custom_config: {}
 voipmonitor::destroy_call_at_bye: '1200'
 voipmonitor::dscp: 'yes'
 voipmonitor::filter: 'not vlan'

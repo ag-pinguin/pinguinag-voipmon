@@ -104,3 +104,8 @@ cdr_partition                = <%= @cdr_partition %>
 <% if @cleandatabase -%>
 cleandatabase                = <%= @cleandatabase %>
 <% end -%>
+<% if @custom_config -%>
+<%   @custom_config.sort.map do |k,v| -%>
+<%=    k %> = <%= v %>
+<%   end -%>
+<% end -%>
